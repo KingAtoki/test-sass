@@ -1,7 +1,184 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+// reset
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+// variables
+$primary-color: #242e42;
+$secondary-color: #1e8efa;
+$tertiary-color: #20293c;
+$quaternary-color: darkgrey;
+$white: white;
+
+// mixins
+
+@mixin column-center {
+    display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@mixin animation ($duration, $animation) {
+    animation-duration: $duration;
+    animation-name: $animation;
+}
+
+// keyframes
+// Slide in Left to Center
+@keyframes menu-item-hover {
+    0% {
+        background-color: lighten($tertiary-color, 25);
+        border-top-right-radius: 0.25rem;
+        border-bottom-right-radius: 0.25rem;
+        color:  lighten($secondary-color, 25);
+    }
+
+    50% {
+        background-color: lighten($tertiary-color, 50);
+        border-top-right-radius: 0.5rem;
+        border-bottom-right-radius: 0.5rem;
+        color:  lighten($secondary-color, 50);
+    }
+
+    100% {
+        transform: translate(0,0);
+    }
+}
+
+
 body,
 html {
-  margin: 0;
   padding: 0;
   width: 100%;
   height: 100%;
+  background-color: $primary-color;
+}
+
+div.divider-top {
+  border: thin solid grey;
+  border-width: thin;
+  margin: 0 auto;
+  margin-bottom: 2rem;
+  width: 90%;
+}
+
+.header {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  width: 95%;
+
+  &__title {
+    font-size: 2rem;
+    color: $white;
+  }
+
+  &__hamburger_nav {
+    &_btn {
+      background-color: $primary-color;
+      border: none;
+      color: $quaternary-color;
+      font-size: 2.5rem;
+
+      &:hover {
+        cursor: pointer;
+      }
+      &:active {
+        color: red;
+      }
+    }
+  }
+}
+
+.menu {
+  padding-left: 2rem;
+  width: 15rem;
+  @include column-center;
+  &__menuContainer {
+    color: $quaternary-color;
+    span:nth-of-type(2) {
+      color: $secondary-color;
+    }
+    &_image {
+    border-radius: 10rem;
+    height: 6rem;
+    width: 6rem;
+  }
+  
+  &_list {
+    width: 100%;
+    li {
+      display: flex;
+      align-items: center;
+      color: $quaternary-color;
+      list-style: none;
+      padding: 1rem;
+      width: 100%;
+
+      &:hover {
+        background-color: $tertiary-color;
+        border-top-right-radius: 1rem;
+        border-bottom-right-radius: 1rem;
+        color: $secondary-color;
+        cursor: pointer;
+        border-left: 5px solid $secondary-color;
+        @include animation(2s, menu-item-hover)
+      }
+      img {
+        width: 2rem;
+      }
+      
+      span {
+        margin-left: 2rem;
+      }
+    }
+  }
+  }
 }
